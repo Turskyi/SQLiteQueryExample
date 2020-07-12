@@ -1,6 +1,5 @@
 package ua.turskyi.sqlitequeryexample
 
-import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -9,9 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : Activity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(R.layout.activity_main), View.OnClickListener {
     companion object {
         const val LOG_TAG = "myLogs"
     }
@@ -28,7 +28,6 @@ class MainActivity : Activity(), View.OnClickListener {
     /** Called when the activity is first created.  */
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         btnAll.setOnClickListener(this)
         btnFunc.setOnClickListener(this)
         btnPeople.setOnClickListener(this)
@@ -146,7 +145,7 @@ class MainActivity : Activity(), View.OnClickListener {
             }
             c.close()
         } else Log.d(LOG_TAG, "Cursor is null")
-        dbHelper!!.close()
+        dbHelper?.close()
     }
 
     inner class DBHelper(context: Context?) : SQLiteOpenHelper(context, "myDB", null,
